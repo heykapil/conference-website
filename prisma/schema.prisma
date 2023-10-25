@@ -1,0 +1,28 @@
+
+
+datasource db {
+    provider     = "mysql"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
+}
+
+generator kysely {
+    provider = "prisma-kysely"
+    output   = "../types"
+    fileName = "db-types.ts"
+}
+
+model registration {
+    id   BigInt @id @default(autoincrement())
+    date DateTime @default(now()) @db.DateTime(6)
+    name String @db.VarChar(50)
+    email String
+    phone String
+    address String @db.VarChar(700)
+    affiliation String
+    university String
+    tranXno String
+    tranXdate DateTime @db.DateTime(6)
+    tranXproof String
+    paper String
+}
