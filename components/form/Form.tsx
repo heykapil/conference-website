@@ -17,6 +17,7 @@ import { FormSchema } from "@/lib/schema";
 import { cn } from "@/lib/utils";
 import { UploadIcon } from "lucide-react";
 import format from "date-fns/format";
+
 type FormInput = z.infer<typeof FormSchema>;
 
 function getDisplayTime() {
@@ -87,7 +88,7 @@ export default function ClientForm() {
         ref={formRef}
         action={async (formData: FormData) => {
           // setCurrentDate(getDisplayTime());
-       
+
           handleSubmit((d) => console.log(d));
           // setLoading(true);
           // handleSubmit((d) => console.log(d));
