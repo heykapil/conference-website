@@ -49,6 +49,7 @@
     "date-fns": "^2.30.0",
     "eslint": "8.51.0",
     "eslint-config-next": "13.5.5",
+    "googleapis": "^128.0.0",
     "kysely": "^0.26.3",
     "kysely-planetscale": "^1.4.0",
     "lucide-react": "^0.287.0",

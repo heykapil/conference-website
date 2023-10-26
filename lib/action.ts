@@ -1,4 +1,5 @@
 "use server";
+import { headers } from "next/headers";
 
 import { queryBuilder } from "@/lib/db";
 import { revalidatePath } from "next/cache";
@@ -79,36 +80,44 @@ export async function sendEmail(formData: FormData) {
 }
 
 export async function sendtoGoogle(formData: FormData) {
+  const host = headers().get("host");
+  const protocal = process?.env.NODE_ENV === "development" ? "http" : "https";
+
   const title = formData.get("title")?.toString() || "";
   const firstname = formData.get("firstname")?.toString() || "";
   const lastname = formData.get("lastname")?.toString() || "";
   const name = title + " " + firstname + " " + lastname;
   const email = formData.get("email")?.toString() || "";
   const phone = formData.get("phone")?.toString() || "";
-  const address = formData.get("address")?.toString() || "";
+  const RegDate = formData.get("RegDate")?.toString() || "";
+  const address =
+    formData.get("address")?.toString().replace(/\n|\r/g, " ") || "";
   const affiliation = formData.get("affiliation")?.toString() || "";
   const university = formData.get("university")?.toString() || "";
   const tranXno = formData.get("tranXno")?.toString() || "";
   const tranXdate = formData.get("tranXdate") || "";
   const tranXproof = formData.get("tranXproof")?.toString();
   const paper = formData.get("paper")?.toString();
-  let res = await fetch(
-    "https://script.google.com/macros/s/AKfycbz5aUB5mhQRgxNJYOIaxHU8b3HQikjppumz77vKHgRz1pjtmEDFU7k3gB-nHvDpipA/exec",
-    {
-      method: "POST",
-      body: JSON.stringify({
-        name,
-        email,
-        phone,
-        address,
-        affiliation,
-        university,
-        tranXno,
-        tranXdate,
-        tranXproof,
-        paper,
-      }),
-    }
-  );
-  console.log(res);
+  let res = await fetch(`${protocal}://${host}/api/google-sheet-submit`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      RegDate,
+      name,
+      email,
+      phone,
+      address,
+      affiliation,
+      university,
+      tranXno,
+      tranXdate,
+      tranXproof,
+      paper,
+    }),
+  });
+  const content = await res.json();
+  console.log(content);
 }

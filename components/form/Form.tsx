@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form";
 import { useRef } from "react";
 import { usePresignedUpload } from "next-s3-upload";
 import Link from "next/link";
-import { saveForm } from "@/lib/action";
-import { useState } from "react";
+import { saveForm, sendEmail, sendtoGoogle } from "@/lib/action";
+import { useState, useEffect } from "react";
 import { FormSubmitButton } from "./SubmitButton";
 import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,19 +15,24 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { FormSchema } from "@/lib/schema";
 import { cn } from "@/lib/utils";
-import { isValid } from "date-fns";
-
+import { UploadIcon } from "lucide-react";
+import format from "date-fns/format";
 type FormInput = z.infer<typeof FormSchema>;
+
+function getDisplayTime() {
+  return format(new Date(), "MMM dd yyyy, hh:mm:ss b");
+}
 
 export default function ClientForm() {
   const formRef = useRef<HTMLFormElement>(null);
   let [tranXproof, setImageUrl] = useState("");
+  const [currentDate, setCurrentDate] = useState("");
   let { FileInput, openFileDialog, uploadToS3, files } = usePresignedUpload();
   const router = useRouter(); // import `useRouter` from next/router
   const {
     handleSubmit,
     register,
-    formState: { errors, isValid, isSubmitting },
+    formState: { errors },
   } = useForm<FormInput>({
     mode: "onChange",
     reValidateMode: "onChange",
@@ -39,6 +44,8 @@ export default function ClientForm() {
   });
 
   let handleFileChange = async (file: any, event: any) => {
+    setCurrentDate(getDisplayTime());
+    //  Can be invoked to get the upload date and time
     if (event.target.files && event.target.files[0]) {
       if (event.target.files[0].size > 1 * 1000 * 1024) {
         alert(
@@ -79,13 +86,16 @@ export default function ClientForm() {
         className="w-full max-w-full mb-8 space-y-1"
         ref={formRef}
         action={async (formData: FormData) => {
+          // setCurrentDate(getDisplayTime());
+       
           handleSubmit((d) => console.log(d));
           // setLoading(true);
           // handleSubmit((d) => console.log(d));
-          await saveForm(formData);
+          // await saveForm(formData);
+          await sendtoGoogle(formData);
           // await sendEmail(formData);
           // await sendtoGoogle(formData);
-          router.replace("/thank-you");
+          // router.replace("/thank-you");
 
           // setLoading(false);
         }}
@@ -135,6 +145,15 @@ export default function ClientForm() {
                       </option>
                     </select>
                   </div>
+                  <input
+                    className="hidden"
+                    type="text"
+                    id="RegDate"
+                    name="RegDate"
+                    value={currentDate}
+                    onChange={(e) => e.target.value}
+                    hidden
+                  />
                   <Input
                     placeholder="First name"
                     aria-label="First name"
@@ -271,16 +290,26 @@ export default function ClientForm() {
                 <div className="flex flex-col space-y-2 mb-2">
                   <Input
                     {...register("tranXdate")}
-                    placeholder="tranXdate"
+                    placeholder="Trascation date"
                     type="datetime-local"
                     aria-invalid={Boolean(errors.tranXdate)}
+                    className={cn(
+                      errors?.tranXdate?.message
+                        ? "text-red-500"
+                        : "text-green-500"
+                    )}
                     required
                   />
 
                   <Input
                     {...register("tranXno")}
-                    placeholder="tranXno"
+                    placeholder="Transcation no."
                     aria-invalid={Boolean(errors.tranXno)}
+                    className={cn(
+                      errors?.tranXno?.message
+                        ? "text-red-500"
+                        : "text-green-500"
+                    )}
                     required
                   />
                 </div>
@@ -291,10 +320,11 @@ export default function ClientForm() {
                       type="button"
                       aria-roledescription="upload file"
                       variant="outline"
-                      className="w-fit"
+                      className="w-fit space-x-1 gap-1"
                       onClick={openFileDialog}
                     >
-                      Upload Proof<sup className="text-red-500">*</sup>
+                      Upload <UploadIcon className="w-4/5 h-4/5" />
+                      <sup className="text-red-500">*</sup>
                     </Button>
                     <div className="pt-1">
                       {files.map((file, index) => (
@@ -337,9 +367,9 @@ export default function ClientForm() {
                       {errors.tranXno.message}
                     </p>
                   )}
-                  {errors?.tranXproof?.message && (
+                  {!tranXproof && (
                     <p className="text-red-500 text-sm">
-                      {errors.tranXproof.message}
+                      Upload payment proof (image not more than 1MB).
                     </p>
                   )}
                 </div>
@@ -380,6 +410,7 @@ export default function ClientForm() {
           pendingState={<p>Submitting...</p>}
           disabled={!tranXproof}
           type="submit"
+          onClick={() => setCurrentDate(getDisplayTime())}
         >
           <p>Submit</p>
         </FormSubmitButton>
