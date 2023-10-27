@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import { NavigationMenuHeader } from "@/components/Menu";
 import Image from "next/image";
+import { Viewport } from "next";
+
 export const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -29,17 +31,16 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ccc" },
-    { media: "(prefers-color-scheme: dark)", color: "#333" },
-  ],
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
 };
-
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "cyan" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
 export default function RootLayout({
   children,
 }: {

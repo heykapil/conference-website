@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: { serverActions: true },
+  // experimental: { serverActions: true },
   reactStrictMode: true,
   swcMinify: true,
   eslint: {
@@ -10,7 +10,17 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ["www.gujaratuniversity.ac.in", "heykapil.in", "cdn.heykapil.in"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.gujaratuniversity.ac.in",
+      },
+      {
+        protocol: "https",
+        hostname: "heykapil.in",
+      },
+      { protocol: "https", hostname: "cdn.heykapil.in" },
+    ],
   },
   async headers() {
     return [
