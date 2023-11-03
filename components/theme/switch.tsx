@@ -21,9 +21,9 @@ const ThemeSwitch2 = () => {
       {mounted && (
         <>
           {theme === "dark" ? (
-            <SunIcon className="relative py-[0.2rem] px-[0.6rem] rounded-lg bg-accent h-[70%] w-[70%]" />
+            <SunIcon className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6" />
           ) : (
-            <MoonIcon className="relative py-[0.2rem] px-[0.6rem] rounded-lg bg-neutral-200 h-[70%] w-[70%]" />
+            <MoonIcon className="h-4 w-4 lg:h-5 lg:w-5 xl:h-6 xl:w-6" />
           )}
         </>
       )}

@@ -1,4 +1,5 @@
 import { siteMetadata } from "@/lib/data/siteMetadata";
+
 export default function Home() {
   return (
     <>
@@ -49,13 +50,12 @@ export default function Home() {
           </defs>
         </svg>
         <div
-          // alt="conference"
-          className="w-full h-[90vh] bg-cover bg-center bg-fit bg-opacity-50"
+          className="w-full h-[90vh] bg-cover bg-center bg-fit"
           style={{
-            backgroundImage: `url(${siteMetadata.HeroBanner})`,
+            backgroundImage: `url(${siteMetadata.HeroBannerDark})`,
           }}
         >
-          <div className="flex items-center justify-center w-full h-full bg-gray-900 bg-opacity-50 py-12">
+          <div className="flex items-center justify-center w-full h-full opacity-100 py-12">
             <div className="text-center">
               <div className=" px-4 mx-auto">
                 <div className="max-w-4xl mx-auto text-center">

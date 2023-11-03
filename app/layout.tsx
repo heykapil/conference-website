@@ -26,6 +26,26 @@ export default function RootLayout({
       >
         <Providers>
           <Header />
+          <svg
+            className="pointer-events-none fixed top-0 left-0 isolate z-50 opacity-25 mix-blend-normal"
+            width="100%"
+            height="100%"
+          >
+            <filter id="pedroduarteisalegend">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.70"
+                numOctaves="5"
+                stitchTiles="stitch"
+              />
+              <feColorMatrix type="saturate" values="0" />
+            </filter>
+            <rect
+              width="100%"
+              height="100%"
+              filter="url(#pedroduarteisalegend)"
+            ></rect>
+          </svg>
           <main className="min-w-0 flex flex-col md:px-0 min-h-screen h-full">
             <section className="flex-1 child min-h-screen">{children}</section>
           </main>

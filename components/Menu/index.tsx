@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { checkDate } from "@/lib/hooks/checkDate";
 import { siteMetadata } from "@/lib/data/siteMetadata";
+import { usePathname } from "next/navigation";
 const lastdate = new Date(siteMetadata.regFormLastDate);
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -56,24 +57,41 @@ const components: { title: string; href: string; description: string }[] = [
 ];
 
 export function NavigationMenuHeader() {
+  const pathname = usePathname();
+  // @ts-ignore
+  const activepath = pathname.split("/")[1];
   return (
     <NavigationMenu>
       <NavigationMenuList>
-        <NavigationMenuItem>
+        <NavigationMenuItem
+          className={cn({
+            ["font-bold bg-accent rounded-md text-cyan-500"]: "" === activepath,
+          })}
+        >
           <Link href="/" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Home
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/docs" legacyBehavior passHref>
+        <NavigationMenuItem
+          className={cn({
+            ["font-bold bg-accent rounded-md text-cyan-500"]:
+              "speakers" === activepath,
+          })}
+        >
+          <Link href="/speakers" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Speakers
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
-        <NavigationMenuItem>
+        <NavigationMenuItem
+          className={cn({
+            ["font-bold bg-accent rounded-md text-cyan-500"]:
+              "schedule" === activepath,
+          })}
+        >
           <Link href="/schedule" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Schedule
