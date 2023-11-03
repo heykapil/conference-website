@@ -20,6 +20,7 @@ const nextConfig = {
         hostname: "heykapil.in",
       },
       { protocol: "https", hostname: "cdn.heykapil.in" },
+      { hostname: "avatars.githubusercontent.com" },
     ],
   },
   async headers() {

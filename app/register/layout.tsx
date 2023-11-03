@@ -3,5 +3,9 @@ export default function RegisterLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <main className="w-full max-w-3xl mx-auto mt-10">{children}</main>;
+  return (
+    <div className="mx-auto mt-10 h-full px-4 lg:px-0 w-full max-w-2xl">
+      {children}
+    </div>
+  );
 }

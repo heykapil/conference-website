@@ -13,8 +13,8 @@ export const FormSchema = z.object({
   }),
   phone: z
     .string()
-    .min(10, "Enter a valid phone number!")
-    .max(13)
+    .min(13, "Enter a valid phone number!")
+    .max(16)
     .regex(phoneRegex, "Invalid Number!"),
   address: z.string().min(5, "Enter valid full address!"),
   affiliation: z.string().min(1, "Invalid Affiliation!"),

@@ -1,4 +1,6 @@
-const { fontFamily } = require("tailwindcss/defaultTheme");
+const { fontFamily } =
+  // eslint-disable-next-line
+  require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -10,14 +12,11 @@ module.exports = {
     "./src/**/*.{ts,tsx}",
   ],
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
     extend: {
+      screens: {
+        // iPad Pro vertical is 1024px exactly
+        lg: "1025px",
+      },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
@@ -53,13 +52,47 @@ module.exports = {
         },
         card: {
           DEFAULT: "hsl(var(--card))",
+          hovered: "hsl(var(--card-hovered))",
           foreground: "hsl(var(--card-foreground))",
         },
+
+        "difficulty-beginner":
+          "hsl(var(--difficulty-beginner) / <alpha-value>)",
+        "difficulty-easy": "hsl(var(--difficulty-easy) / <alpha-value>)",
+        "difficulty-medium": "hsl(var(--difficulty-medium) / <alpha-value>)",
+        "difficulty-hard": "hsl(var(--difficulty-hard) / <alpha-value>)",
+        "difficulty-extreme": "hsl(var(--difficulty-extreme) / <alpha-value>)",
+        "difficulty-beginner-dark":
+          "hsl(var(--difficulty-beginner-dark) / <alpha-value>)",
+        "difficulty-easy-dark":
+          "hsl(var(--difficulty-easy-dark) / <alpha-value>)",
+        "difficulty-medium-dark":
+          "hsl(var(--difficulty-medium-dark) / <alpha-value>)",
+        "difficulty-hard-dark":
+          "hsl(var(--difficulty-hard-dark) / <alpha-value>)",
+        "difficulty-extreme-dark":
+          "hsl(var(--difficulty-extreme-dark) / <alpha-value>)",
+      },
+      boxShadow: {
+        beginner: "0 0 1rem -0.15rem hsl(var(--difficulty-beginner))",
+        easy: "0 0 1rem -0.15rem hsl(var(--difficulty-easy))",
+        medium: "0 0 1rem -0.15rem hsl(var(--difficulty-medium))",
+        hard: "0 0 1rem -0.15rem hsl(var(--difficulty-hard))",
+        extreme: "0 0 1rem -0.15rem hsl(var(--difficulty-extreme))",
+        "beginner-dark":
+          "0 0 1rem -0.15rem hsl(var(--difficulty-beginner-dark))",
+        "easy-dark": "0 0 1rem -0.15rem hsl(var(--difficulty-easy-dark))",
+        "medium-dark": "0 0 1rem -0.15rem hsl(var(--difficulty-medium-dark))",
+        "hard-dark": "0 0 1rem -0.15rem hsl(var(--difficulty-hard-dark))",
+        "extreme-dark": "0 0 1rem -0.15rem hsl(var(--difficulty-extreme-dark))",
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      fontFamily: {
+        sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {
@@ -77,5 +110,10 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("daisyui")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("daisyui"),
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/container-queries"),
+  ],
 };

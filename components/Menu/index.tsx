@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-
+import { CalendarDaysIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 // import { Icons } from "@/components/icons";
 import {
@@ -14,7 +14,9 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-
+import { checkDate } from "@/lib/hooks/checkDate";
+import { siteMetadata } from "@/lib/data/siteMetadata";
+const lastdate = new Date(siteMetadata.regFormLastDate);
 const components: { title: string; href: string; description: string }[] = [
   {
     title: "Abstract submission",
@@ -86,26 +88,33 @@ export function NavigationMenuHeader() {
                 <NavigationMenuLink asChild>
                   <a
                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                    href="/"
+                    href="#"
                   >
-                    {/* <Icons.logo className="h-6 w-6" /> */}
+                    <CalendarDaysIcon className="h-6 w-6" />
                     <div className="mb-2 mt-4 text-lg font-medium">
                       Registration
                     </div>
-                    <p className="text-sm leading-tight text-muted-foreground">
-                      paragraph.
-                    </p>
+                    {checkDate(lastdate) === true ? (
+                      <p className="text-sm leading-tight text-red-500">
+                        ends on <br />
+                        {siteMetadata.regFormLastDate}.
+                      </p>
+                    ) : (
+                      <p className="text-sm leading-tight text-red-500">
+                        Last date is over!
+                      </p>
+                    )}
                   </a>
                 </NavigationMenuLink>
               </li>
-              <ListItem href="/docs" title="Register Now!">
-                Re-usable components built using Radix UI and Tailwind CSS.
+              <ListItem href="/register" title="Register Now!">
+                for attending the {siteMetadata.title}.
               </ListItem>
-              <ListItem href="/docs/installation" title="Accomodation">
-                How to install dependencies and structure your app.
+              <ListItem href="/fees" title="Fee payment">
+                for payment of registration, accomodation etc.
               </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Reach us!">
-                Styles for headings, paragraphs, lists...etc
+              <ListItem href="/contact" title="Reach us!">
+                for queries, issues, suggestions, feedbacks etc.
               </ListItem>
             </ul>
           </NavigationMenuContent>

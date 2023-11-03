@@ -1,84 +1,9 @@
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-const schedule = [
-  {
-    day: "Thursday 28th",
-    events: [
-      {
-        id: 1,
-        name: "Registration",
-        href: "#link",
-        time: "09:00 AM",
-        details: "",
-        member: "Alice Doe",
-      },
-      {
-        id: 2,
-        name: "Introduction",
-        href: "#link",
-        time: "10:30 AM",
-        details: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-        member: "John Doe",
-      },
-      {
-        id: 3,
-        name: "Financial Meeting",
-        href: "#link",
-        time: "14:00 PM",
-        details:
-          "Accusantium atque tempore dolore ratione unde sunt dignissimos recusandae saepe provident architecto.",
-        member: "John Doe",
-      },
-    ],
-  },
-  {
-    day: "Friday 29th",
-    events: [
-      {
-        id: 1,
-        name: "Content Marketing",
-        href: "#link",
-        time: "12:00 AM",
-        details:
-          "Consectetur harum porro quam, facere necessitatibus quos veritatis.",
-        member: "John Doe",
-      },
-      {
-        id: 2,
-        name: "Social Media",
-        href: "#link",
-        time: "15:50 PM",
-        details: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-        member: "Alice Doe",
-      },
-    ],
-  },
-  {
-    day: "Saturday 30th",
-    events: [
-      {
-        id: 1,
-        name: "Content Marketing",
-        href: "#link",
-        time: "12:00 AM",
-        details:
-          "Consectetur harum porro quam, facere necessitatibus quos veritatis.",
-        member: "John Doe",
-      },
-      {
-        id: 2,
-        name: "Social Media",
-        href: "#link",
-        time: "15:50 PM",
-        details: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-        member: "Alice Doe",
-      },
-    ],
-  },
-];
+import { schedule } from "@/lib/data/schedule";
 export default function Schedule() {
   return (
-    <>
+    <main className="max-w-3xl mx-auto">
       <div className="container mx-auto px-4">
         <section className="py-12 px-4 text-center">
           <div className="w-full max-w-2xl mx-auto">
@@ -98,22 +23,22 @@ export default function Schedule() {
           ))}
           {schedule.map((day) => (
             <>
-              <TabsContent value={day.day}>
+              <TabsContent key={day.day} value={day.day}>
                 <ul className="py-1 flex flex-col">
                   {day.events.map((event) => (
                     <li
                       key={event.id}
-                      className="group py-3 border-b px-2 sm:px-5 flex items-center"
+                      className="group py-3 border-y px-2 sm:px-5 flex items-center"
                     >
                       {/* :::time container */}
-                      <div className="flex-shrink-0 mr-3 sm:mr-12 px-2 flex flex-col bg-purple-50">
-                        <span className="text-sm sm:text-base text-purple-500 font-bold">
+                      <div className="flex-shrink-0 mr-3 sm:mr-12 px-2 flex flex-col bg-accent">
+                        <span className="text-sm sm:text-base text-foreground font-bold">
                           {event.time}
                         </span>
                       </div>
                       {/* :::details container */}
                       <div className="col-span-7 sm:col-span-6 px-3">
-                        <p className="text-base text-gray-700 font-bold uppercase">
+                        <p className="text-base font-bold uppercase">
                           {event.name}
                         </p>
                         <p className="mt-2 text-xs sm:text-sm text-gray-500">
@@ -128,6 +53,6 @@ export default function Schedule() {
           ))}
         </Tabs>
       </div>
-    </>
+    </main>
   );
 }
