@@ -17,44 +17,8 @@ import {
 import { checkDate } from "@/lib/hooks/checkDate";
 import { siteMetadata } from "@/lib/data/siteMetadata";
 import { usePathname } from "next/navigation";
+import { components } from "@/lib/data/menu";
 const lastdate = new Date(siteMetadata.regFormLastDate);
-const components: { title: string; href: string; description: string }[] = [
-  {
-    title: "Abstract submission",
-    href: "/authors",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
-  },
-  {
-    title: "Presentations",
-    href: "/presentations",
-    description:
-      "For sighted users to preview content available behind a link.",
-  },
-  {
-    title: "Journals",
-    href: "/journals",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-  },
-  {
-    title: "Lectures",
-    href: "/lectures",
-    description: "Visually or semantically separates content.",
-  },
-  {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
-    description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-  },
-  {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
-    description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-  },
-];
 
 export function NavigationMenuHeader() {
   const pathname = usePathname();
@@ -65,7 +29,8 @@ export function NavigationMenuHeader() {
       <NavigationMenuList>
         <NavigationMenuItem
           className={cn({
-            ["font-bold bg-accent rounded-md text-cyan-500"]: "" === activepath,
+            ["font-semibold bg-accent rounded-md text-[#0000ff] dark:text-cyan-400"]:
+              "" === activepath,
           })}
         >
           <Link href="/" legacyBehavior passHref>
@@ -76,7 +41,7 @@ export function NavigationMenuHeader() {
         </NavigationMenuItem>
         <NavigationMenuItem
           className={cn({
-            ["font-bold bg-accent rounded-md text-cyan-500"]:
+            ["font-semibold bg-accent rounded-md text-[#0000ff] dark:text-cyan-400"]:
               "speakers" === activepath,
           })}
         >
@@ -88,7 +53,7 @@ export function NavigationMenuHeader() {
         </NavigationMenuItem>
         <NavigationMenuItem
           className={cn({
-            ["font-bold bg-accent rounded-md text-cyan-500"]:
+            ["font-semibold bg-accent rounded-md text-[#0000ff] dark:text-cyan-400"]:
               "schedule" === activepath,
           })}
         >

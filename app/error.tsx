@@ -27,7 +27,7 @@ export default function Error({
             {siteMetadata.email}.
           </a>{" "}
           <br />
-          We'll fix it soon, Thanks for understanding!
+          We will fix it soon, Thanks for understanding!
         </p>
       </div>
     </section>

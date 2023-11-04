@@ -2,7 +2,7 @@ export const siteMetadata = {
   title: "This and that name of the conference",
   time: "Data, time and venue information",
   university: "The Falana and Dhimka University",
-  department: "Department of Mathematics and Statistics",
+  department: "Mathematics and Statistics", // Without mentioning department of
   regFormLastDate: "November 4, 2023", // Keep format same or any accepted Date format in javascript
   language: "en-us",
   theme: "system", // system, dark or light

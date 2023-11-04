@@ -7,8 +7,11 @@ import Header from "@/components/header";
 import { metadata } from "./metadata";
 export { metadata };
 export const fontSans = FontSans({
+  // weight: ["400", "500", "600", "700"],
+  // style: ["normal", "italic"],
   subsets: ["latin"],
   variable: "--font-sans",
+  // display: "swap",
 });
 
 export default function RootLayout({
@@ -17,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           "font-sans antialiased mx-auto bg-background text-foregound max-w-[100%] mb-20 h-auto min-h-0 mt-0 lg:mx-auto",
