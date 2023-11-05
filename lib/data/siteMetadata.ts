@@ -3,7 +3,7 @@ export const siteMetadata = {
   time: "Data, time and venue information",
   university: "The Falana and Dhimka University",
   department: "Mathematics and Statistics", // Without mentioning department of
-  regFormLastDate: "November 4, 2023", // Keep format same or any accepted Date format in javascript
+  regFormLastDate: "November 10, 2023", // Keep format same or any accepted Date format in javascript
   language: "en-us",
   theme: "system", // system, dark or light
   siteUrl: "https://localhost:3000/",

@@ -745,4 +745,5 @@ html {
   background: var(--background);
   offset: none !important;
   transition: 0.4s;
+  z-index: 1 !important;
 }

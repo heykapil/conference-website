@@ -1,16 +1,17 @@
 "use client";
-import "react-phone-number-input/style.css";
+import "@/app/react-phone-input.css";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
+import useFormPersist from "react-hook-form-persist";
 import { useRef } from "react";
 import { usePresignedUpload } from "next-s3-upload";
 import Link from "next/link";
 import {
   // saveForm,
-  // sendEmail,
+  sendEmail,
   sendtoGoogle,
 } from "@/lib/action";
 import { useState } from "react";
@@ -21,23 +22,15 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { FormSchema } from "@/lib/schema";
 import { cn } from "@/lib/utils";
-import { UploadIcon } from "lucide-react";
+import { Check, UploadIcon } from "lucide-react";
 import format from "date-fns/format";
 import { collegeList } from "@/lib/data/collegelist";
 import { Progress } from "../ui/progress";
-
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   // isPossiblePhoneNumber,
   isValidPhoneNumber,
 } from "react-phone-number-input";
+import Image from "next/image";
 type FormInput = z.infer<typeof FormSchema>;
 
 function getDisplayTime() {
@@ -54,6 +47,8 @@ export default function ClientForm() {
     handleSubmit,
     register,
     control,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<FormInput>({
     mode: "onChange",
@@ -64,7 +59,12 @@ export default function ClientForm() {
     //   email: "",
     // },
   });
-  let customDomain = process.env.S3_CUSTOM_DOMAIN as string;
+  useFormPersist("comment-form", {
+    watch,
+    setValue,
+    // exclude: [""],
+  });
+  // let customDomain = process.env.S3_CUSTOM_DOMAIN as string;
   let handleFileChange = async (file: any, event: any) => {
     setCurrentDate(getDisplayTime());
     //  Can be invoked to get the upload date and time
@@ -96,7 +96,7 @@ export default function ClientForm() {
   return (
     <>
       <form
-        id="comment-forn"
+        id="comment-form"
         style={{ opacity: 1 }}
         // onSubmit={handleSubmit(async (data) => {
         //   console.log(data);
@@ -132,47 +132,44 @@ export default function ClientForm() {
               <div className="space-y-2 mb-2">
                 <div className="flex flex-row space-x-2 ">
                   <div className="text-sm">
-                    <Select
+                    <select
                       {...register("title")}
-                      // className={cn(
-                      //   errors?.title?.message
-                      //     ? "text-red-500 border p-[0.65rem] rounded-lg"
-                      //     : "text-green-500 border p-[0.65rem] rounded-lg"
-                      // )}
+                      className={cn(
+                        "bg-background",
+                        errors?.title?.message
+                          ? "text-red-500 border p-[0.65rem] rounded-lg"
+                          : "text-green-500 border p-[0.65rem] rounded-lg"
+                      )}
                       required
                     >
-                      <SelectTrigger className="w-[70px]">
-                        <SelectValue placeholder="Title" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectItem value="Mr." id="title-0">
-                            Mr.
-                          </SelectItem>
-                          <SelectItem value="Mrs." id="title-1">
-                            Mrs.
-                          </SelectItem>
-                          <SelectItem value="Miss" id="title-2">
-                            Miss
-                          </SelectItem>
-                          <SelectItem value="Ms." id="title-3">
-                            Ms.
-                          </SelectItem>
-                          <SelectItem value="Mx." id="title-4">
-                            Mx.
-                          </SelectItem>
-                          <SelectItem value="Dr." id="title-5">
-                            Dr.
-                          </SelectItem>
-                          <SelectItem value="Hon." id="title-6">
-                            Hon.
-                          </SelectItem>
-                          <SelectItem id="title-7" value=" ">
-                            None
-                          </SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
+                      <option value="" id="title">
+                        Title
+                      </option>
+                      <option value="Mr." id="title-0">
+                        Mr.
+                      </option>
+                      <option value="Mrs." id="title-1">
+                        Mrs.
+                      </option>
+                      <option value="Miss" id="title-2">
+                        Miss
+                      </option>
+                      <option value="Ms." id="title-3">
+                        Ms.
+                      </option>
+                      <option value="Mx." id="title-4">
+                        Mx.
+                      </option>
+                      <option value="Dr." id="title-5">
+                        Dr.
+                      </option>
+                      <option value="Hon." id="title-6">
+                        Hon.
+                      </option>
+                      <option id="title-7" value=" ">
+                        None
+                      </option>
+                    </select>
                   </div>
                   <input
                     className="hidden"
@@ -368,42 +365,42 @@ export default function ClientForm() {
                   />
                 </div>
                 <div className="flex-1">
-                  <div className="flex flex-col">
+                  <div className="flex flex-col justify-between">
                     <FileInput onChange={handleFileChange} accept="image/*" />
-                    <Button
-                      type="button"
-                      aria-roledescription="upload file"
-                      variant="outline"
-                      className="w-fit space-x-1 hover:bg-background/50 gap-1"
-                      onClick={openFileDialog}
-                    >
-                      Upload <UploadIcon className="w-4/5 h-4/5" />
-                      <sup className="text-red-500">*</sup>
-                    </Button>
+                    <div className="flex flex-row">
+                      <Button
+                        type="button"
+                        aria-roledescription="upload file"
+                        variant="outline"
+                        className="w-fit space-x-1 hover:bg-background/50 gap-1"
+                        onClick={openFileDialog}
+                      >
+                        Upload <UploadIcon className="w-4/5 h-4/5" />
+                        <sup className="text-red-500">*</sup>
+                      </Button>
+                    </div>
                     <div className="pt-1">
                       {files.map((file, index) => (
                         <div className="flex flex-row items-center" key={index}>
                           <Progress
                             value={file.progress}
-                            className="w-1/3 h-2 bg-none border border-muted"
+                            className="w-1/2 md:w-1/3 lg:w-1/4 h-2 bg-none border border-muted"
                           />
                           {file.progress.toFixed(2)}%
                         </div>
                       ))}
                     </div>
                     {tranXproof && (
-                      <>
-                        <p className="">
-                          Success!{" "}
-                          <Link
-                            href={tranXproof}
-                            className="text-blue-700 dark:text-cyan-300 underline"
-                            target="_blank"
-                          >
-                            View Attachment
-                          </Link>
-                        </p>
-                      </>
+                      <div className="flex flex-row gap-1 items-center">
+                        <Check className="text-green-500" />
+                        <Link
+                          href={tranXproof}
+                          className="text-primary text-sm underline"
+                          target="_blank"
+                        >
+                          View Attachment
+                        </Link>
+                      </div>
                     )}
                   </div>
                   <input

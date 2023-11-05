@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <>
       <header className="sticky text-black dark:text-white top-0 z-9999 py-1 backdrop-filter backdrop-blur-sm bg-background/50 border-b border-muted">
-        <div className="mt-0 z-9999 mx-auto rounded-lg w-full flex-row justify-between">
+        <div className="mt-0 mx-auto rounded-lg w-full flex-row justify-between">
           <div className="flex justify-between w-full max-w-full mx-auto px-2 md:px-10 lg:px-20">
             <div className="flex gap-2">
               <Image
@@ -17,7 +17,7 @@ export default function Header() {
                 width="50"
                 height="50"
               />
-              <div className="word-break items-center justify-center hidden font-semibold lg:flex text-sm text-[#0000ff] dark:text-cyan-400">
+              <div className="word-break items-center justify-center hidden font-normal lg:flex text-sm text-primary">
                 Department of
                 <br />
                 {siteMetadata.department}

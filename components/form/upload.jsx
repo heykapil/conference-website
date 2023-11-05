@@ -38,7 +38,7 @@ export default function UploadComponent() {
       </div>
       {tranXproof && (
         <>
-          <p className="text-green-500">
+          <p className="text-primary">
             Uploaded!{" "}
             <Link className="upload-link" href={tranXproof} target="_blank">
               View Attachment

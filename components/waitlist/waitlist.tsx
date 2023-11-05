@@ -1,8 +1,6 @@
 import Link from "next/link";
-import { clsx } from "clsx";
 import { MailIcon } from "lucide-react";
 import { Balancer } from "react-wrap-balancer";
-import styles from "./waitlist.module.css";
 import { Button } from "@/components/ui/button";
 
 export function WaitlistBanner() {
@@ -11,8 +9,8 @@ export function WaitlistBanner() {
     <section className="flex bg-background">
       <div className="container grid grid-cols-1 items-center justify-center py-[64px] md:grid-cols-2 bg-background">
         <div className="flex flex-col gap-8 px-8 pb-8 pt-48 sm:px-16 sm:pt-20 md:px-0 md:pb-0 md:pt-16">
-          <h1 className="max-w-[13ch] text-4xl font-bold md:max-w-none">
-            <Balancer>Be the First to Know</Balancer>
+          <h1 className="max-w-[13ch] text-2xl font-bold md:max-w-none">
+            <Balancer>About the </Balancer>
           </h1>
           <p className="leading-8 text-black/50 dark:text-white/50">
             <Balancer>

@@ -6,12 +6,24 @@ import {
   Card,
 } from "@/components/ui/card";
 import { data } from "@/lib/data/speakers";
+import { cn } from "@/lib/utils";
 import { Clock2Icon, ExternalLinkIcon, SubtitlesIcon } from "lucide-react";
 import Link from "next/link";
+import randomColor from "randomcolor";
 export default function SpeakerPage() {
+  let LightColor = randomColor({
+    luminosity: "light",
+    format: "hex",
+    // e.g. 'hsla(27, 88.99%, 81.83%, 0.6450211517512798)'
+  });
+  let DarkColor = randomColor({
+    luminosity: "dark",
+    format: "hex",
+  });
+  console.log(LightColor, DarkColor);
   return (
     <main className="mx-auto max-w-6xl">
-      <section className="pt-14 bg-background">
+      <section className="pt-14 cards-conatiner">
         <div className="w-full max-w-2xl mx-auto">
           <h1 className="text-2xl leading-tight font-heading text-center ">
             Speakers
@@ -25,7 +37,12 @@ export default function SpeakerPage() {
           {data.map((speaker) => (
             <Card
               key={speaker.speaker}
-              className="mx-auto border border-muted shadow-sm p-6 rounded-md w-full min-w-md max-w-md"
+              className={
+                "mx-auto border bg-card border-muted shadow-sm p-6 rounded-md w-full min-w-md max-w-md hover:bg-card-hovered hover:scale-105 ease-in-out duration-200 transition"
+              }
+              // style={{
+              //   background: LightColor,
+              // }}
             >
               <div className="flex items-center space-x-4">
                 <Avatar className="w-14 h-14">

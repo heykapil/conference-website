@@ -15,41 +15,37 @@ export default function Schedule() {
         </section>
         <Tabs defaultValue="Thursday 28th" className="w-full">
           {schedule.map((day) => (
-            <>
-              <TabsList key={day.day}>
-                <TabsTrigger value={day.day}>{day.day}</TabsTrigger>
-              </TabsList>
-            </>
+            <TabsList key={day.day}>
+              <TabsTrigger value={day.day}>{day.day}</TabsTrigger>
+            </TabsList>
           ))}
           {schedule.map((day) => (
-            <>
-              <TabsContent key={day.day} value={day.day}>
-                <ul className="py-1 flex flex-col">
-                  {day.events.map((event) => (
-                    <li
-                      key={event.id}
-                      className="group py-3 border-y px-2 sm:px-5 flex items-center"
-                    >
-                      {/* :::time container */}
-                      <div className="flex-shrink-0 mr-3 sm:mr-12 px-2 flex flex-col bg-accent">
-                        <span className="text-sm sm:text-base text-foreground font-bold">
-                          {event.time}
-                        </span>
-                      </div>
-                      {/* :::details container */}
-                      <div className="col-span-7 sm:col-span-6 px-3">
-                        <p className="text-base font-bold uppercase">
-                          {event.name}
-                        </p>
-                        <p className="mt-2 text-xs sm:text-sm text-gray-500">
-                          {event.details}
-                        </p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </TabsContent>
-            </>
+            <TabsContent key={day.day} value={day.day}>
+              <ul className="py-1 flex flex-col">
+                {day.events.map((event) => (
+                  <li
+                    key={event.id}
+                    className="group py-3 border-y px-2 sm:px-5 flex items-center"
+                  >
+                    {/* :::time container */}
+                    <div className="flex-shrink-0 mr-3 sm:mr-12 px-2 flex flex-col bg-accent">
+                      <span className="text-sm sm:text-base text-foreground font-bold">
+                        {event.time}
+                      </span>
+                    </div>
+                    {/* :::details container */}
+                    <div className="col-span-7 sm:col-span-6 px-3">
+                      <p className="text-base font-bold uppercase">
+                        {event.name}
+                      </p>
+                      <p className="mt-2 text-xs sm:text-sm text-gray-500">
+                        {event.details}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </TabsContent>
           ))}
         </Tabs>
       </div>

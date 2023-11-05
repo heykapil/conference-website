@@ -3,10 +3,14 @@ import styled from "styled-components";
 import Link from "next/link";
 import { useState, ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { components } from "@/lib/data/menu";
 import {
+  ArrowLeft,
+  ArrowRight,
   AtSign,
   Clock,
   CreditCard,
+  Download,
   HomeIcon,
   Info,
   Speech,
@@ -126,11 +130,11 @@ export default function MobileMenu() {
                         handleClick={() => {
                           setMenuOpen(false);
                         }}
-                        href="/contact"
+                        href="/download"
                         className="flex flex-row gap-4 justify-between"
                       >
-                        <AtSign />
-                        Reach Us!
+                        <Download />
+                        Downloads
                       </LinkButton>
                     </AccordionContent>
                   </AccordionItem>
@@ -143,36 +147,19 @@ export default function MobileMenu() {
                       </AccordionTrigger>
                     </div>
                     <AccordionContent className="ml-[1px]">
-                      <LinkButton
-                        handleClick={() => {
-                          setMenuOpen(false);
-                        }}
-                        href="/register"
-                        className="flex flex-row gap-4 justify-between"
-                      >
-                        <UserPlus />
-                        Registration
-                      </LinkButton>
-                      <LinkButton
-                        handleClick={() => {
-                          setMenuOpen(false);
-                        }}
-                        href="/fees"
-                        className="flex flex-row gap-4 justify-between"
-                      >
-                        <CreditCard />
-                        Fee payment
-                      </LinkButton>
-                      <LinkButton
-                        handleClick={() => {
-                          setMenuOpen(false);
-                        }}
-                        href="/contact"
-                        className="flex flex-row gap-4 justify-between"
-                      >
-                        <AtSign />
-                        Reach Us!
-                      </LinkButton>
+                      {components.map((component) => (
+                        <LinkButton
+                          key={component.title}
+                          handleClick={() => {
+                            setMenuOpen(false);
+                          }}
+                          href={component.href}
+                          className="flex flex-row gap-4 justify-between"
+                        >
+                          <ArrowRight />
+                          {component.title}
+                        </LinkButton>
+                      ))}
                     </AccordionContent>
                   </AccordionItem>
                   {/* <AccordionItem value="attended" className="">

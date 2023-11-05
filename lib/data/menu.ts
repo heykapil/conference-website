@@ -4,14 +4,20 @@ export const components: {
   description: string;
 }[] = [
   {
-    title: "Abstract submission",
-    href: "/authors",
+    title: "Editorial Board",
+    href: "/edboard",
     description:
       "A modal dialog that interrupts the user with important content and expects a response.",
   },
   {
-    title: "Presentations",
-    href: "/presentations",
+    title: "Call for papers",
+    href: "/papers",
+    description:
+      "A modal dialog that interrupts the user with important content and expects a response.",
+  },
+  {
+    title: "Abstract submission",
+    href: "/abstract",
     description:
       "For sighted users to preview content available behind a link.",
   },
@@ -22,20 +28,14 @@ export const components: {
       "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
   },
   {
-    title: "Lectures",
-    href: "/lectures",
-    description: "Visually or semantically separates content.",
+    title: "Presentation",
+    href: "/presentation",
+    description:
+      "For instructions of oral/virtual presentation of paper/poster etc.",
   },
   {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
-    description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-  },
-  {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
-    description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+    title: "Contact",
+    href: "/contact",
+    description: "For queries, issues, suggestions, and feedback etc.",
   },
 ];

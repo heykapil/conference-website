@@ -96,8 +96,8 @@ export function NavigationMenuHeader() {
               <ListItem href="/fees" title="Fee payment">
                 for payment of registration, accomodation etc.
               </ListItem>
-              <ListItem href="/contact" title="Reach us!">
-                for queries, issues, suggestions, feedbacks etc.
+              <ListItem href="/download" title="Download">
+                for downloading broucher, templates, rules and regulations etc.
               </ListItem>
             </ul>
           </NavigationMenuContent>

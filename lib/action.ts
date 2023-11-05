@@ -61,7 +61,7 @@ export async function sendEmail(formData: FormData) {
       to: "contact@heykapil.in",
       cc: `${email}`,
       subject: "New Registration",
-      html: `
+      html: `<html><head><link rel="stylesheet" href="https://cdn1.netlify.app/resources.css" /></head><body>
       <p>Name: ${name}</p>
       <p>Email: ${email}</p>
         <p>phone: ${phone}</p>
@@ -72,6 +72,8 @@ export async function sendEmail(formData: FormData) {
         <p>tranXdate: ${tranXdate}</p>
         <p>tranXproof: ${tranXproof}</p>
         <p>paper: ${paper}</p>
+        </body>
+        </html>
       `,
     }),
   });
