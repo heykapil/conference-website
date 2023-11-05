@@ -41,7 +41,7 @@ export function Footsies() {
               href="#"
               className="dark:hover:text-primary-foreground transition-colors duration-300 hover:text-neutral-900 hover:underline"
             >
-              Dos and Dont's
+              Dos and Donts
             </Link>
           </span>
           <span>
