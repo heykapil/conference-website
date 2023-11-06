@@ -11,9 +11,9 @@ export default APIRoute.configure({
       filename
     )}`;
   },
-  accessKeyId: process.env.S3_UPLOAD_KEY,
-  secretAccessKey: process.env.S3_UPLOAD_SECRET,
-  bucket: process.env.S3_UPLOAD_BUCKET,
-  region: process.env.S3_UPLOAD_REGION,
-  endpoint: process.env.S3_UPLOAD_ENDPOINT,
+  accessKeyId: process.env.TEBI_CLIENT_KEY,
+  secretAccessKey: process.env.TEBI_SECRET_KEY,
+  bucket: process.env.TEBI_BUCKET_NAME,
+  region: process.env.TEBI_UPLOAD_REGION,
+  endpoint: process.env.TEBI_ENDPOINT,
 });

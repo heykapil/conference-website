@@ -88,8 +88,10 @@ export default function ClientForm() {
     setImageUrl(
       // @ts-ignore
       url.replace(
-        "https://8e501682577cc8e1aa6aff01d08633e8.r2.cloudflarestorage.com/kapil",
-        "https://cdn.heykapil.in"
+        "https://s3.tebi.io/file.heykapil.in",
+        "https://file.heykapil.in"
+        // "https://8e501682577cc8e1aa6aff01d08633e8.r2.cloudflarestorage.com/kapil",
+        // "https://cdn.heykapil.in"
       )
     );
   };
