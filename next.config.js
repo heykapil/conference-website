@@ -20,6 +20,7 @@ const nextConfig = {
         hostname: "heykapil.in",
       },
       { protocol: "https", hostname: "cdn.heykapil.in" },
+      { protocol: "https", hostname: "file.heykapil.in" },
       { hostname: "avatars.githubusercontent.com" },
     ],
   },

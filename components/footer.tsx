@@ -6,7 +6,7 @@ export function Footsies() {
   return (
     <>
       {/* <WaitlistBanner /> */}
-      <footer className="flex flex-col items-center bg-background text-foreground gap-2 px-8 pb-12 text-sm font-light sm:px-16 sm:pb-20 sm:pt-6 md:px-0 md:py-12">
+      <footer className="flex flex-col items-center bg-background text-foreground gap-2 px-8 py-12 text-sm font-light sm:px-16 sm:pb-20 sm:pt-6 md:px-0 md:py-12">
         <div className="container flex flex-col-reverse justify-between gap-2 md:flex-row md:items-end">
           <span>Theme by Kapil Chaudhary.</span>
           <div className="flex gap-2">
@@ -45,8 +45,8 @@ export function Footsies() {
             </Link>
           </span>
           <span>
-            <div className="inline-block rotate-180">©</div>
-            {new Date().getFullYear()} {siteMetadata.university}
+            <div className="inline-block">©</div> {new Date().getFullYear()}{" "}
+            {siteMetadata.university}
           </span>
         </div>
       </footer>

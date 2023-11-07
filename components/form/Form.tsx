@@ -1,7 +1,4 @@
 "use client";
-import "@/app/react-phone-input.css";
-import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -11,7 +8,7 @@ import { usePresignedUpload } from "next-s3-upload";
 import Link from "next/link";
 import {
   // saveForm,
-  sendEmail,
+  // sendEmail,
   sendtoGoogle,
 } from "@/lib/action";
 import { useState } from "react";
@@ -26,10 +23,7 @@ import { Check, UploadIcon } from "lucide-react";
 import format from "date-fns/format";
 import { collegeList } from "@/lib/data/collegelist";
 import { Progress } from "../ui/progress";
-import {
-  // isPossiblePhoneNumber,
-  isValidPhoneNumber,
-} from "react-phone-number-input";
+
 import Image from "next/image";
 type FormInput = z.infer<typeof FormSchema>;
 
@@ -46,7 +40,6 @@ export default function ClientForm() {
   const {
     handleSubmit,
     register,
-    control,
     watch,
     setValue,
     formState: { errors },
@@ -64,7 +57,6 @@ export default function ClientForm() {
     setValue,
     // exclude: [""],
   });
-  // let customDomain = process.env.S3_CUSTOM_DOMAIN as string;
   let handleFileChange = async (file: any, event: any) => {
     setCurrentDate(getDisplayTime());
     //  Can be invoked to get the upload date and time
@@ -100,18 +92,9 @@ export default function ClientForm() {
       <form
         id="comment-form"
         style={{ opacity: 1 }}
-        // onSubmit={handleSubmit(async (data) => {
-        //   console.log(data);
-
-        //   // @ts-ignore
-        //   await saveForm(data);
-        //   router.replace("/thank-you");
-        // })}
         className="w-full h-full min-h-full max-w-full mb-8 space-y-1"
         ref={formRef}
         action={async (formData: FormData) => {
-          // setCurrentDate(getDisplayTime());
-
           handleSubmit((d) => console.log(d));
           // setLoading(true);
           // handleSubmit((d) => console.log(d));
@@ -120,7 +103,6 @@ export default function ClientForm() {
           // await sendEmail(formData);
           // await sendtoGoogle(formData);
           // router.replace("/thank-you");
-
           // setLoading(false);
         }}
       >
@@ -227,14 +209,10 @@ export default function ClientForm() {
                     {...register("email")}
                   />
                   {/* @ts-ignore */}
-                  <PhoneInputWithCountry
+                  <Input
                     placeholder="Phone number"
-                    defaultCountry="IN"
-                    international
-                    withCountryCallingCode
-                    name="phone"
-                    control={control}
-                    smartCaret={false}
+                    minLength={10}
+                    {...register("phone")}
                     className={cn(
                       "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
                       errors?.phone?.message
@@ -242,7 +220,6 @@ export default function ClientForm() {
                         : "text-green-500 w-full md: max-w-[37%] lg:max-w-[43.75%]"
                     )}
                     aria-invalid={Boolean(errors.phone)}
-                    rules={{ required: true, validate: isValidPhoneNumber }}
                   />
                 </div>
                 <Textarea
@@ -341,7 +318,7 @@ export default function ClientForm() {
               <div className="-title text-xl font-medium mb-2 ">
                 3. Payment Details
               </div>
-              <div className="flex flex-row space-x-4">
+              <div className="flex flex-row justify-start space-x-4">
                 <div className="flex flex-col space-y-2 mb-2">
                   <Input
                     {...register("tranXdate")}
@@ -349,6 +326,7 @@ export default function ClientForm() {
                     type="datetime-local"
                     aria-invalid={Boolean(errors.tranXdate)}
                     className={cn(
+                      "w-auto",
                       errors?.tranXdate?.message ? "text-red-500" : ""
                     )}
                     required
@@ -359,6 +337,7 @@ export default function ClientForm() {
                     placeholder="Transcation no."
                     aria-invalid={Boolean(errors.tranXno)}
                     className={cn(
+                      "w-auto",
                       errors?.tranXno?.message
                         ? "text-red-500"
                         : "text-green-500"
@@ -366,10 +345,10 @@ export default function ClientForm() {
                     required
                   />
                 </div>
-                <div className="flex-1">
-                  <div className="flex flex-col justify-between">
+                <div className="flex flex-row space-x-1">
+                  <div className="flex flex-col space-y-0 justify-between">
                     <FileInput onChange={handleFileChange} accept="image/*" />
-                    <div className="flex flex-row">
+                    <div className="flex flex-col justify-start">
                       <Button
                         type="button"
                         aria-roledescription="upload file"
@@ -377,8 +356,7 @@ export default function ClientForm() {
                         className="w-fit space-x-1 hover:bg-background/50 gap-1"
                         onClick={openFileDialog}
                       >
-                        Upload <UploadIcon className="w-4/5 h-4/5" />
-                        <sup className="text-red-500">*</sup>
+                        Upload <UploadIcon className="" />
                       </Button>
                     </div>
                     <div className="pt-1">
@@ -386,7 +364,7 @@ export default function ClientForm() {
                         <div className="flex flex-row items-center" key={index}>
                           <Progress
                             value={file.progress}
-                            className="w-1/2 md:w-1/3 lg:w-1/4 h-2 bg-none border border-muted"
+                            className="w-full h-[6px] bg-none border border-muted"
                           />
                           {file.progress.toFixed(2)}%
                         </div>
@@ -415,24 +393,31 @@ export default function ClientForm() {
                     minLength={10}
                     required
                   />
-                  {errors?.tranXdate?.message && (
-                    <p className="text-red-500 text-sm">
-                      {errors.tranXdate.message}
-                    </p>
-                  )}
-
-                  {errors?.tranXno?.message && (
-                    <p className="text-red-500 text-sm">
-                      {errors.tranXno.message}
-                    </p>
-                  )}
-                  {!tranXproof && (
-                    <p className="text-red-500 text-sm">
-                      Upload payment proof (image not more than 1MB).
-                    </p>
-                  )}
                 </div>
               </div>
+              {tranXproof && (
+                <Image
+                  alt="uploaded image"
+                  crossOrigin="anonymous"
+                  src={tranXproof}
+                  width={100}
+                  height={100}
+                />
+              )}
+              {errors?.tranXdate?.message && (
+                <p className="text-red-500 text-sm">
+                  {errors.tranXdate.message}
+                </p>
+              )}
+
+              {errors?.tranXno?.message && (
+                <p className="text-red-500 text-sm">{errors.tranXno.message}</p>
+              )}
+              {!tranXproof && (
+                <p className="text-red-500 text-sm">
+                  Upload payment proof (image not more than 1MB).
+                </p>
+              )}
             </div>
             <div className="flex items-center space-x-2">
               <select
@@ -451,10 +436,10 @@ export default function ClientForm() {
             </div>
 
             <br />
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center gap-2">
               <input
                 type="checkbox"
-                className="before:content[''] peer relative h-4 w-4 cursor-pointer appearance-none rounded-none checked:rounded-full outline-offset-2	border border-foreground transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-green-500 before:opacity-0 before:transition-opacity checked:border-green-500 checked:bg-green-500 checked:before:bg-green-500 hover:before:opacity-10 checked:outline checked:outline-offset-2 checked:outline-green-500"
+                className="checkbox checkbox-secondary checkbox-md"
                 id="terms"
                 required
               />
@@ -470,8 +455,12 @@ export default function ClientForm() {
           </div>
         </div>
         <FormSubmitButton
-          className=""
-          pendingState={<p>Submitting...</p>}
+          className="btn btn-success disabled:btn-error disabled:opacity-50"
+          pendingState={
+            <p className="flex items-center gap-1">
+              Submitting <span className="loading loading-dots"></span>
+            </p>
+          }
           disabled={!tranXproof}
           type="submit"
           onClick={() => setCurrentDate(getDisplayTime())}
