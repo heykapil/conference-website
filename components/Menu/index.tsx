@@ -17,7 +17,8 @@ import {
 import { checkDate } from "@/lib/hooks/checkDate";
 import { siteMetadata } from "@/lib/data/siteMetadata";
 import { usePathname } from "next/navigation";
-import { components } from "@/lib/data/menu";
+import { components } from "@/lib/data/menu/otherInfo";
+import { people } from "@/lib/data/menu/people";
 const lastdate = new Date(siteMetadata.regFormLastDate);
 
 export function NavigationMenuHeader() {
@@ -39,7 +40,7 @@ export function NavigationMenuHeader() {
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
-        <NavigationMenuItem
+        {/* <NavigationMenuItem
           className={cn({
             ["font-semibold bg-accent rounded-md text-[#0000ff] dark:text-cyan-400"]:
               "speakers" === activepath,
@@ -50,7 +51,7 @@ export function NavigationMenuHeader() {
               Speakers
             </NavigationMenuLink>
           </Link>
-        </NavigationMenuItem>
+        </NavigationMenuItem> */}
         <NavigationMenuItem
           className={cn({
             ["font-semibold bg-accent rounded-md text-[#0000ff] dark:text-cyan-400"]:
@@ -62,6 +63,22 @@ export function NavigationMenuHeader() {
               Schedule
             </NavigationMenuLink>
           </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>People</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+              {people.map((people) => (
+                <ListItem
+                  key={people.title}
+                  title={people.title}
+                  href={people.href}
+                >
+                  {people.description}
+                </ListItem>
+              ))}
+            </ul>
+          </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Attending ?</NavigationMenuTrigger>

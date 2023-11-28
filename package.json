@@ -53,6 +53,7 @@
     "eslint": "8.51.0",
     "eslint-config-next": "13.5.5",
     "framer-motion": "^10.16.4",
+    "geist": "latest",
     "googleapis": "^128.0.0",
     "kysely": "^0.26.3",
     "kysely-planetscale": "^1.4.0",

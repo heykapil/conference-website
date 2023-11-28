@@ -16,7 +16,13 @@ export default function Schedule() {
         <Tabs defaultValue="Thursday 28th" className="w-full">
           {schedule.map((day) => (
             <TabsList key={day.day}>
-              <TabsTrigger value={day.day}>{day.day}</TabsTrigger>
+              <TabsTrigger
+                value={day.day}
+                className="easy-out duration-100 transition-color"
+                role="tab"
+              >
+                {day.day}
+              </TabsTrigger>
             </TabsList>
           ))}
           {schedule.map((day) => (

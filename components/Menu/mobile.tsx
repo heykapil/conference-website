@@ -3,11 +3,9 @@ import styled from "styled-components";
 import Link from "next/link";
 import { useState, ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { components } from "@/lib/data/menu";
+import { components } from "@/lib/data/menu/otherInfo";
 import {
-  ArrowLeft,
   ArrowRight,
-  AtSign,
   Clock,
   CreditCard,
   Download,
